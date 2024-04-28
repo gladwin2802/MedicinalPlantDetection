@@ -1,0 +1,84 @@
+.about-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    background-image: linear-gradient(115deg, #9F7AEA, #FEE2FE);
+}
+
+.navigation {
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    padding: 20px;
+    margin: 10px;
+}
+
+.navigation-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem;
+    cursor: pointer;
+}
+
+.book-container {
+    display: flex;
+    width: 78%;
+    height: 78%;
+    border: 2px solid #000;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+}
+
+.book-page {
+    flex: 1;
+    padding: 2rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: transform 0.5s ease;
+}
+
+.image-page {
+    border-right: 2px solid #000;
+    width: 500px;
+    height: 500px;
+}
+
+.book-image {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.content-page {
+    color: #000;
+    background-color: #fff;
+}
+
+.page-turn-left {
+    transform: perspective(2000px) rotateY(-20deg);
+}
+
+.page-turn-right {
+    transform: perspective(2000px) rotateY(20deg);
+}
+
+.content-title {
+    font-size: 2rem;
+    font-weight: bold;
+    margin-bottom: 1rem;
+}
+
+.content-list {
+    list-style-type: none;
+    padding: 0;
+}
+
+.content-item {
+    font-size: 1.6rem;
+    line-height: 2.4rem;
+}

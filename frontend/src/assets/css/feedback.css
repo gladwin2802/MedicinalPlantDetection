@@ -1,0 +1,54 @@
+.feedback-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: linear-gradient(115deg, #9F7AEA, #FEE2FE);
+  }
+  
+  .feedback-form {
+    display: flex;
+    flex-direction: column;
+    width: 100%; /* Adjust width as needed */
+  }
+  
+  .feedback-title {
+    text-align: center;
+  }
+  
+  .feedback-fields {
+    gap: 2rem; /* Add spacing between form elements */
+  }
+  
+  .feedback-textarea {
+    resize: vertical; /* Allow textarea resizing */
+  }
+  
+  .feedback-upload {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+  }
+  
+  .feedback-upload-label {
+    font-weight: bold;
+  }
+  
+  .feedback-preview {
+    border-radius: 50%; /* Circular image preview */
+  }
+  
+  .feedback-rating {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .star-rating {
+    font-size: 2rem;
+    cursor: pointer;
+  }
+  
+  .star-rating.active,
+  .star-rating:hover {
+    color: yellow;
+  }
+  
