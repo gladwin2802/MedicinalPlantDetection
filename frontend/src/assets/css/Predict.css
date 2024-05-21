@@ -4,8 +4,7 @@
     width: 100%;
     justify-content: center;
     align-items: center;
-    padding-top: 40px;
-    padding-bottom: 40px;
+    padding-top: 10px;
 }
 
 .input-file {
@@ -16,10 +15,11 @@
 }
 
 .dim {
-    width: 50%;
+    width: 93%;
     background-color: white;
     border-radius: 10px;
     box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+    padding: 25px;
 }
 
 .upload-box {
@@ -32,8 +32,19 @@
     padding: 25px;
 }
 
-.pad- {
+.dim .pad- {
     padding: 25px;
+    min-height: 600px;
+}
+
+.pad- img {
+    object-fit: cover;
+}
+
+.pad- p {
+    color: var(--primary);
+    font-size: 20px;
+    font-weight: bold;
 }
 
 .in-upload {
@@ -71,8 +82,8 @@
     font-weight: bold;
     text-align: center;
     text-decoration: none;
-    border: 2px solid #1E90FF;
-    color: #1E90FF;
+    border: 2px solid #1aac4d;
+    color: #1aac4d;
     background-color: transparent;
     cursor: pointer;
     border-radius: 5px;
@@ -80,7 +91,7 @@
 }
 
 .btn:hover {
-    background-color: #1E90FF;
+    background-color: #1aac4d;
     color: white;
 }
 

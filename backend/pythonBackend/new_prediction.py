@@ -1,3 +1,4 @@
+import re
 from keras.models import load_model  
 from PIL import Image, ImageOps  
 import numpy as np
@@ -7,6 +8,7 @@ np.set_printoptions(suppress=True)
 
 # Load the model
 model = load_model("keras_Model.h5", compile=False)
+# model = load_model("saved_model_2.pb", compile=False)
 
 # Load the labels
 class_names = open("labels.txt", "r").readlines()
@@ -40,6 +42,8 @@ class Model:
         prediction = model.predict(data)
         index = np.argmax(prediction)
         class_name = class_names[index]
+        class_name = re.sub(r'\W+', '', class_name)
+
         confidence_score = prediction[0][index]
 
         # Print prediction and confidence score

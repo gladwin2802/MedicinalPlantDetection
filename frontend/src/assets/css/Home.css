@@ -1,0 +1,25 @@
+.imageContainer {
+    position: relative;
+    width: 100%;
+}
+
+.imageContainer img {
+    width: 100%;
+    height: 60%;
+}
+
+.imageContainer span {
+    /* color: #1aac54; */
+    color: black;
+}
+
+.overlayText {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-49%, -80%);
+    /* color: #1aac83; */
+    color: white;
+    font-size: 70px;
+    font-weight: bold;
+}
