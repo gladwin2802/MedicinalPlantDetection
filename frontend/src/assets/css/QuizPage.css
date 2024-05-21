@@ -1,178 +1,63 @@
-/* Overall container styling */
-/* Global background color/gradient */
-.background {
-    background-image: linear-gradient(115deg, #9F7AEA, #FEE2FE);
-}
 .quiz-container {
     display: flex;
     flex-direction: column;
-    justify-content: center;
     align-items: center;
-    height: 100vh;
-    background-color: #222;
-    position: relative;
-}
-
-/* Center align text content */
-.center-content {
     text-align: center;
-}
-
-/* Timer text styling */
-.timer-text {
-    color: white;
-    font-size: 32px;
-    font-weight: bold;
-    margin-bottom: 20px;
-}
-
-/* Language text styling */
-.language-text {
-    color: black;
-    font-size: 24px;
-    font-weight: bold;
-}
-
-/* Style for the question container */
-.question-container {
-    border: 2px solid #007bff;
-    padding: 30px;
+    margin: 20px;
+    background-color: white;
     border-radius: 10px;
-    margin-bottom: 30px;
-    width: 90%;
-    max-width: 800px;
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    padding: 10px;
+    width: 600px;
 }
 
-/* Style for the question text */
-.question-text {
-    font-size: 28px;
-    color: #333;
-    font-weight: bold;
+.language-select-container {
+    margin-top: 40px;
 }
 
-/* Style for the options container */
-.options-container {
-    list-style-type: none;
-    padding: 0;
-}
-
-/* Style for each option item */
-.option-item {
-    margin-bottom: 15px;
-}
-
-/* Style for option buttons */
-.option-button {
-    padding: 12px 24px;
-    border: 2px solid #007bff;
-    border-radius: 5px;
-    cursor: pointer;
-    background-color: transparent;
-    color: #007bff;
-    transition: background-color 0.3s, color 0.3s;
-    width: 100%;
+.language-select-container label {
+    margin-right: 10px;
     font-size: 18px;
+    font-weight: bold;
+    color: #000000;
 }
 
-/* Style for selected option button */
-.option-button.selected {
+.language-select-container select {
+    text-align: center;
+    width: 150px;
+    padding: 10px 15px;
+    font-size: 16px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    outline: none;
+    transition: border-color 0.3s, box-shadow 0.3s, background-color 0.3s;
+    background-color: #fff;
+    appearance: none;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.language-select-container select:focus {
+    border-color: #007bff;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+    background-color: #f0f8ff;
+}
+
+.language-select-container select:hover {
+    border-color: #007bff;
+}
+
+.quiz-container button {
+    cursor: pointer;
     background-color: #007bff;
     color: white;
-}
-
-/* Style for button container */
-.button-container {
-    display: flex;
-    justify-content: space-between;
-    width: 90%;
-    max-width: 800px;
-    margin-bottom: 30px;
-}
-
-/* Style for buttons */
-.button-container button {
-    padding: 12px 24px;
+    padding: 10px 20px;
     border: none;
     border-radius: 5px;
-    cursor: pointer;
-    background-color: #007bff;
-    color: white;
-    transition: background-color 0.3s;
-    font-size: 18px;
+    font-size: 16px;
+    transition: background-color 0.3s, box-shadow 0.3s;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Style for disabled button */
-.button-container button:disabled {
-    background-color: #ccc;
-    cursor: not-allowed;
-}
-
-/* Style for button hover effect */
-.button-container button:hover {
+.quiz-container button:hover {
     background-color: #0056b3;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
-
-/* Style for result container */
-.result-container {
-    border: 2px solid #007bff;
-    padding: 40px;
-    border-radius: 10px;
-    width: 90%;
-    max-width: 800px;
-    background-color: rgba(255, 255, 255, 0.9);
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-}
-
-/* Style for result text */
-.result-text {
-    font-size: 32px;
-    color: #333;
-    font-weight: bold;
-}
-
-/* Style for score text */
-.score-text {
-    font-size: 24px;
-    color: #333;
-}
-
-/* Style for link */
-.link {
-    color: #007bff;
-    text-decoration: none;
-    transition: color 0.3s;
-}
-
-/* Hover effect for link */
-.link:hover {
-    color: #0056b3;
-}
-
-/* Style for language toggle */
-.language-toggle {
-    position: absolute;
-    top: 20px;
-    right: 20px;
-}
-
-/* Style for result box */
-.result-box {
-    width: 400px;
-    margin: 0 auto;
-}
-
-/* Style for result button */
-.result-button {
-    display: flex;
-    align-items: center;
-    margin-bottom: 10px;
-}
-
-/* Style for result button text */
-.result-button p {
-    margin-right: 10px;
-}
-
-

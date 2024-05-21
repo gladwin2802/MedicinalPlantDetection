@@ -1,14 +1,44 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axiosNode from '../config/axiosNode';
 import axiosPy from '../config/axiosPy';
 import Header from '../components/Header';
 import '../assets/css/Predict.css';
+import Navbar from '../components/Navbar';
+import Card from '../components/Card';
+import { useAuthContext } from '../hooks/useAuthContext';
 
 function Predict() {
     const [dropImage, setDropImage] = useState("https://cdn-icons-png.flaticon.com/512/4904/4904233.png")
     const [file, setFile] = useState(null);
     const [uploadedImage, setUploadedImage] = useState(null);
-    const [prediction, setPrediction] = useState(null);
+    const [prediction, setPrediction] = useState('');
+    const { user, userId } = useAuthContext()
+    const [images, setImages] = useState(null);
+
+    const fetchUserImages = async () => {
+        try {
+            const response = await axiosNode.get(`/api/upload/all/${userId}`, {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            });
+            // console.log(response)
+            setImages(response.data);
+        } catch (error) {
+            console.error('Error fetching user images:', error);
+        }
+    };
+
+    useEffect(() => {
+        console.log(images)
+    }, [images])
+
+    useEffect(() => {
+        if (userId) {
+            fetchUserImages();
+            console.log(images)
+        }
+    }, [userId])
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
@@ -23,17 +53,28 @@ function Predict() {
         formData.append('image', file);
         try {
             const predictionData = await getPrediction(formData);
-            formData.append('prediction', JSON.stringify(predictionData));
-            const response = await axiosNode.post('/api/upload', formData);
+            formData.append('prediction', predictionData.result.class);
+            formData.append('user_id', userId);
+            const response = await axiosNode.post('/api/upload/', formData, {
+                headers: {
+                    'Authorization': `Bearer ${user.token}`
+                }
+            });
             console.log('Image uploaded successfully:', response.data);
             const imageId = response.data;
             try {
-                const imageResponse = await axiosNode.get(`/api/image/${imageId}`);
+                const imageResponse = await axiosNode.get(`/api/upload/${imageId}`, {
+                    headers: {
+                        'Authorization': `Bearer ${user.token}`
+                    }
+                });
+                console.log(imageResponse);
                 const imageBuffer = new Uint8Array(imageResponse.data.data.data);
                 const blob = new Blob([imageBuffer], { type: imageResponse.data.contentType });
                 const imageUrl = URL.createObjectURL(blob);
                 setUploadedImage(imageUrl);
-                setPrediction(JSON.stringify(imageResponse.data.prediction.result.class));
+                setPrediction(JSON.stringify(imageResponse.data.prediction));
+                fetchUserImages();
             } catch (error) {
                 console.error('Error retrieving image:', error);
             }
@@ -49,34 +90,59 @@ function Predict() {
                 'Content-Type': 'multipart/form-data'
             }
         });
-        console.log(response);
+        console.log("By PyBackend : ", response);
         return response.data;
     };
 
+    const genImage = (image) => {
+        const imageBuffer = new Uint8Array(image.data.data);
+        const blob = new Blob([imageBuffer], { type: image.contentType });
+        const imageUrl = URL.createObjectURL(blob);
+        return imageUrl
+    }
+
     return (
         <div>
-            <Header></Header>
-            <div className="main">
-                <div className='dim upload-box'>
-                    <div className='in-upload'>
-                        <img className='img' src={dropImage} width={"100px"} height={"100px"} />
-                        <input type="file" className="input-file" onChange={handleFileChange} />
-                        <div className="text-f top-m">Drag your file, or browse</div>
+            <Navbar />
+            <Header />
+            <br />
+            <div className='container' style={{ display: 'flex', flexDirection: "row", justifyContent: "center", alignItems: "start", padding: "40px", gap: "10px", paddingTop: "0px" }}>
+                {userId && images && <div className="records" style={{ flex: 1 }}>
+                    <h1>Previous predictions</h1>
+                    <div className="cards-container" style={{ display: 'flex', flexDirection: "row", justifyContent: "start", alignItems: "start" }}>
+                        {images.map((image, index) => (
+                            <Card
+                                key={index}
+                                imageUrl={genImage(image)}
+                                prediction={image.prediction}
+                            />
+                        ))}
                     </div>
-                    <button className="btn" onClick={handleSubmit}>Upload Image</button>
+                </div>}
+                <div className="main" style={{ flex: 0.4, alignSelf: "start" }}>
+                    <h1 style={{ alignSelf: 'flex-start' }}>Get predictions</h1>
+                    <div className='dim upload-box'>
+                        <div className='in-upload'>
+                            <img className='img' src={dropImage} width={"100px"} height={"100px"} />
+                            <input type="file" className="input-file" onChange={handleFileChange} />
+                            <div className="text-f top-m">Drag your file, or browse</div>
+                        </div>
+                        <button className="btn" onClick={handleSubmit}>Upload Image</button>
+                    </div>
+                    <br />
+                    {uploadedImage && (
+                        <div className='dim pad-'>
+                            <h3>Uploaded Image:</h3>
+                            <img src={uploadedImage} alt="Uploaded" width={"100%"} height={"100%"} />
+                            {prediction && (
+                                <>
+                                    <h3>Prediction</h3>
+                                    <p>{prediction}</p>
+                                </>)
+                            }
+                        </div>
+                    )}
                 </div>
-                {uploadedImage && (
-                    <div className='dim pad-'>
-                        <h2>Uploaded Image:</h2>
-                        <img src={uploadedImage} alt="Uploaded" width={"100%"} height={"100%"} />
-                        {prediction && (
-                            <>
-                                <h2>Predictions</h2>
-                                <p>{prediction}</p>
-                            </>)
-                        }
-                    </div>
-                )}
             </div>
         </div>
     );

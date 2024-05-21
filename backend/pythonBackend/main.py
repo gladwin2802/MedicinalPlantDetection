@@ -24,6 +24,7 @@ def upload_file():
         file.save(f"static/{file.filename}")
         print("File saved successfully !!!")
         result = model__.get_output(f"static/{file.filename}")
+        os.remove(f"static/{file.filename}")
         result["score"] = float(result["score"])
         print(result)
         return jsonify(result=result)
