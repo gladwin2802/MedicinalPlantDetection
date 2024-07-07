@@ -24,8 +24,6 @@ function StoreMap() {
     const [activeMarker, setActiveMarker] = useState(null);
 
     const onLoad = React.useCallback(function callback(map) {
-        const bounds = new window.google.maps.LatLngBounds(center);
-        map.fitBounds(bounds);
         setMap(map);
     }, []);
 
@@ -53,6 +51,7 @@ function StoreMap() {
                         zoom={15}
                         onLoad={onLoad}
                         onUnmount={onUnmount}
+                        mapTypeId={window.google.maps.MapTypeId.HYBRID}
                     >
                         {
                             markers.map((marker, index) => (

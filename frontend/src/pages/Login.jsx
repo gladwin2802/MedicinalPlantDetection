@@ -15,7 +15,7 @@ const Login = () => {
     return (
         <>
             <Navbar />
-            <form className="login" onSubmit={handleSubmit}>
+            <form className="login" onSubmit={handleSubmit} style={{marginTop: "170px"}}>
                 <center>
                     <h3>Log In</h3>
                 </center>

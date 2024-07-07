@@ -16,7 +16,7 @@ const Signup = () => {
         <>
             <Navbar />
 
-            <form className="signup" onSubmit={handleSubmit}>
+            <form className="signup" onSubmit={handleSubmit}  style={{marginTop: "170px"}}>
                 <center>
                     <h3>Sign Up</h3>
                 </center>

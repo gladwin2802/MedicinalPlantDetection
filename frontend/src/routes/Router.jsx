@@ -17,7 +17,7 @@ const AppRouter = () => {
     const routes = createBrowserRouter([
         {
             path: "test",
-            element: user ? <Test /> : <Navigate to="/" />
+            element: user ? <Test /> : <Navigate to="/login" />
         },
         {
             path: "login",
@@ -25,7 +25,7 @@ const AppRouter = () => {
         },
         {
             path: "signup",
-            element: !user ? <Signup /> : <Navigate to="/" />
+            element: <Signup />
         },
         {
             path: "/",
@@ -33,23 +33,23 @@ const AppRouter = () => {
         },
         {
             path: "predict",
-            element: user ? <Predict /> : <Navigate to="/" />
+            element: user ? <Predict /> : <Navigate to="/login" />
         },
         {
             path: "map",
-            element: user ? <StoreMap /> : <Navigate to="/" />
+            element: user ? <StoreMap /> : <Navigate to="/login" />
         },
         {
             path: "quiz",
-            element: user ? <QuizPage /> : <Navigate to="/" />
+            element: user ? <QuizPage /> : <Navigate to="/login" />
         },
         {
             path: "about",
-            element: user ? <About /> : <Navigate to="/" />
+            element: user ? <About /> : <Navigate to="/login" />
         },
         {
             path: "feedback",
-            element: user ? <Feedback /> : <Navigate to="/" />
+            element: user ? <Feedback /> : <Navigate to="/login" />
         }
     ]);
 

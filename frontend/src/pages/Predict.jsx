@@ -6,6 +6,7 @@ import '../assets/css/Predict.css';
 import Navbar from '../components/Navbar';
 import Card from '../components/Card';
 import { useAuthContext } from '../hooks/useAuthContext';
+// import { useNavigate } from 'react-router-dom';
 
 function Predict() {
     const [dropImage, setDropImage] = useState("https://cdn-icons-png.flaticon.com/512/4904/4904233.png")
@@ -22,7 +23,6 @@ function Predict() {
                     'Authorization': `Bearer ${user.token}`
                 }
             });
-            // console.log(response)
             setImages(response.data);
         } catch (error) {
             console.error('Error fetching user images:', error);
@@ -33,12 +33,23 @@ function Predict() {
         console.log(images)
     }, [images])
 
+    // const navigate = useNavigate();
+
     useEffect(() => {
         if (userId) {
             fetchUserImages();
-            console.log(images)
+            console.log(images);
         }
-    }, [userId])
+    }, [userId]);
+    // useEffect(() => {
+    //     if (userId) {
+    //         fetchUserImages();
+    //         console.log(images)
+    //     }
+    //     else {
+    //         window.location.href = '/predict';
+    //     }
+    // }, [userId])
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
@@ -108,9 +119,10 @@ function Predict() {
             <br />
             <div className='container' style={{ display: 'flex', flexDirection: "row", justifyContent: "center", alignItems: "start", padding: "40px", gap: "10px", paddingTop: "0px" }}>
                 {userId && images && <div className="records" style={{ flex: 1 }}>
-                    <h1>Previous predictions</h1>
+                    <h1>History</h1>
                     <div className="cards-container" style={{ display: 'flex', flexDirection: "row", justifyContent: "start", alignItems: "start" }}>
                         {images.map((image, index) => (
+                            image.prediction != "Invalid image" &&
                             <Card
                                 key={index}
                                 imageUrl={genImage(image)}
@@ -120,26 +132,32 @@ function Predict() {
                     </div>
                 </div>}
                 <div className="main" style={{ flex: 0.4, alignSelf: "start" }}>
-                    <h1 style={{ alignSelf: 'flex-start' }}>Get predictions</h1>
+                    <h1 style={{ alignSelf: 'center' }}>Upload Image to know plant</h1>
                     <div className='dim upload-box'>
-                        <div className='in-upload'>
-                            <img className='img' src={dropImage} width={"100px"} height={"100px"} />
-                            <input type="file" className="input-file" onChange={handleFileChange} />
-                            <div className="text-f top-m">Drag your file, or browse</div>
+                        <div className='in-upload' style={{ cursor: "pointer" }}>
+                            <img className='img' src={dropImage} width={"100px"} height={"100px"} style={{ cursor: "pointer" }} />
+                            <input type="file" accept="image/*" className="input-file" onChange={handleFileChange} style={{ cursor: "pointer" }} />
+                            <div className="text-f top-m" style={{ cursor: "pointer" }}>Drag your file, or browse</div>
                         </div>
-                        <button className="btn" onClick={handleSubmit}>Upload Image</button>
+                        <button className="btn" onClick={handleSubmit}>Submit</button>
                     </div>
                     <br />
                     {uploadedImage && (
                         <div className='dim pad-'>
-                            <h3>Uploaded Image:</h3>
+                            <h2>Uploaded Image:</h2>
                             <img src={uploadedImage} alt="Uploaded" width={"100%"} height={"100%"} />
-                            {prediction && (
+                            {prediction != '"Invalid image"' && (
                                 <>
-                                    <h3>Prediction</h3>
+                                    <h2>Found as</h2>
                                     <p>{prediction}</p>
                                 </>)
                             }
+                            {prediction == '"Invalid image"' && (
+                                <>
+                                    <p style={{ "color": "red", "textAlign": "center" }}>Uploaded image is invalid !</p>
+                                    <p style={{ "color": "red", "textAlign": "center" }}>Kindly upload a zoomed in leaf image !</p>
+                                </>
+                            )}
                         </div>
                     )}
                 </div>

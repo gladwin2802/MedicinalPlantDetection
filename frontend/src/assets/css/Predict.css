@@ -34,10 +34,11 @@
 
 .dim .pad- {
     padding: 25px;
-    min-height: 600px;
+    max-height: 600px;
 }
 
 .pad- img {
+    max-height: 600px;
     object-fit: cover;
 }
 

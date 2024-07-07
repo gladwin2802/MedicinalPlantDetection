@@ -46,6 +46,7 @@ function Feedback() {
                 },
             });
             console.log('Submitted feedback:', response.data);
+            window.alert("Feedback Successfully submitted !!!")
             setComments('');
             setRating(0);
             setUploadedFile(null);
