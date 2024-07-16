@@ -14,7 +14,7 @@ const requireAuth = require('../middleware/requireAuth')
 router.use(requireAuth)
 
 const multer = require('multer');
-const upload = multer({ dest: '../uploads/' });
+const upload = multer({ dest: '../backend/uploads/' });
 
 // Insert the image into database, with prediction value
 router.post('/', upload.single('image'), uploadImage);

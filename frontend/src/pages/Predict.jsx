@@ -6,7 +6,6 @@ import '../assets/css/Predict.css';
 import Navbar from '../components/Navbar';
 import Card from '../components/Card';
 import { useAuthContext } from '../hooks/useAuthContext';
-// import { useNavigate } from 'react-router-dom';
 
 function Predict() {
     const [dropImage, setDropImage] = useState("https://cdn-icons-png.flaticon.com/512/4904/4904233.png")
@@ -33,23 +32,12 @@ function Predict() {
         console.log(images)
     }, [images])
 
-    // const navigate = useNavigate();
-
     useEffect(() => {
         if (userId) {
             fetchUserImages();
             console.log(images);
         }
     }, [userId]);
-    // useEffect(() => {
-    //     if (userId) {
-    //         fetchUserImages();
-    //         console.log(images)
-    //     }
-    //     else {
-    //         window.location.href = '/predict';
-    //     }
-    // }, [userId])
 
     const handleFileChange = (event) => {
         const selectedFile = event.target.files[0];
@@ -118,7 +106,7 @@ function Predict() {
             <Header />
             <br />
             <div className='container' style={{ display: 'flex', flexDirection: "row", justifyContent: "center", alignItems: "start", padding: "40px", gap: "10px", paddingTop: "0px" }}>
-                {userId && images && <div className="records" style={{ flex: 1 }}>
+                {userId && images && images.length > 0 && <div className="records" style={{ flex: 1 }}>
                     <h1>History</h1>
                     <div className="cards-container" style={{ display: 'flex', flexDirection: "row", justifyContent: "start", alignItems: "start" }}>
                         {images.map((image, index) => (

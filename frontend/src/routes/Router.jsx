@@ -25,7 +25,7 @@ const AppRouter = () => {
         },
         {
             path: "signup",
-            element: <Signup />
+            element: !user ? <Signup /> : <Navigate to="/" />
         },
         {
             path: "/",
